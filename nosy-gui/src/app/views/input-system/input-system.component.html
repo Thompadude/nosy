@@ -1,0 +1,124 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <form (ngSubmit)="updateExistingSystem(a)" #a="ngForm">
+
+        <div class="card-header">
+          <strong>Input Systems</strong>
+        </div>
+        <div class="card-body">
+
+
+          <div class="form-group row">
+
+            <div class="col-sm-12">
+
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <label>Input System Name</label>
+
+                  <ng-select #inputSystemNgSelect [(items)]="inputSystems"
+                             bindLabel="inputSystemName"
+                             bindValue="inputSystemId"
+                             name="inputSystemNameNg"
+                             [(ngModel)]="selectedInputSystemId"
+                             (change)="onChange($event)"
+                             (clear)="onClear()">
+                  </ng-select>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div><!--/.row-->
+
+
+
+
+<!--
+
+            <div class="form-group row">
+
+              <div class="col-sm-12">
+
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="firstFormSelectDropdownInputSystem">Input System Name</label>
+
+                    <select id="firstFormSelectDropdownInputSystem" #firstFormSelectDropdownInputSystem
+                            name="firstFormSelectDropdownInputSystem" class="form-control"
+                            (change)="onChange($event.target.value)">
+                      <option [hidden]="firstFormEnable" value="">Please choose One</option>
+
+                      <option *ngFor="let inputSystem of inputSystems" #updateSystemName>
+                        {{ inputSystem.inputSystemName }}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>/.row-->
+            <div *ngIf="firstFormEnable">
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="updateExistingInputSystemName">Input System Name</label>
+                    <input type="text" class="form-control" #updateExistingInputSystemName
+                           id="updateExistingInputSystemName" name="updateExistingInputSystemName"
+                           ngModel="{{firstFormUpdatableInputSystem.inputSystemName}}">
+
+                  </div>
+                </div>
+              </div><!--/.row-->
+            </div>
+          <div [hidden]="!isOperationsUpdateAndDelete" [style.color]="colourOperationsUpdateAndDelete">{{operationsUpdateAndDelete}}</div>
+
+        </div>
+
+
+        <div class="card-footer">
+          <button type="submit" [disabled]="!firstFormEnable" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i>
+            Update
+          </button>
+          <button type="button" [disabled]="!firstFormEnable" class="btn btn-sm btn-danger"
+                  (click)="deleteExistingSystem()"><i class="fa fa-dot-circle-o"></i>
+            Delete
+          </button>
+        </div>
+        </form>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          <strong> New Input System</strong>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="newInputSystemName">Input System Name</label>
+              <div class="col-md-9">
+                <input type="text" id="newInputSystemName" #newInputSystemName name="newInputSystemName" class="form-control"
+                       placeholder="New Input System Name">
+                <span class="help-block"><i>Should be unique</i></span>
+
+              </div>
+            </div>
+          <div [hidden]="!isPostSuccess" [style.color]="colourPostSuccessMessage">{{postSuccessMessage}}</div>
+
+        </div>
+        <div class="card-footer">
+
+          <button type="submit" class="btn btn-sm btn-primary" (click)="newInputSystem(newInputSystemName.value)"><i class="fa fa-dot-circle-o"></i> Submit</button>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+
+    <!--/.row-->
+  </div>
+</div>

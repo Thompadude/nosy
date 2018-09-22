@@ -1,0 +1,64 @@
+<div *ngIf="profile">
+  <div class="animated fadeIn">
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="card">
+
+          <div class="card-header">
+            <strong>Profile</strong>
+          </div>
+          <div class="card-body">
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" #email
+                         id="email" name="email"
+                         ngModel="{{profile.email}}" [disabled]="true">
+
+                </div>
+              </div>
+            </div><!--/.row-->
+
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" #firstName
+                         id="firstName" name="firstName"
+                         ngModel="{{profile.firstName}}"  [disabled]="true">
+
+                </div>
+              </div>
+            </div><!--/.row-->
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" #lastName
+                         id="lastName" name="lastName"
+                         ngModel="{{profile.lastName }}" [disabled]="true">
+
+                </div>
+              </div>
+            </div><!--/.row-->
+          </div>
+
+
+          <div class="card-footer">
+
+            <button type="submit" class="btn btn-sm btn-danger"
+                    (click)="deleteProfile()"><i class="fa fa-dot-circle-o"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

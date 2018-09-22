@@ -1,0 +1,187 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <form (ngSubmit)="sendEmail(a)" #a="ngForm">
+
+          <div class="card-header">
+            <strong>Email Template</strong>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+
+                <div class="form-group">
+                  <label>Input System Name</label>
+
+
+                  <ng-select [(items)]="inputSystems"
+                             bindLabel="inputSystemName"
+                             bindValue="inputSystemId"
+                             name="inputSystemNameNg"
+                             [(ngModel)]="selectedInputSystemId"
+                             (change)="onChangeInputSystemFirstForm($event)"
+                             (clear)="onClearInputSystem()">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <!--<div class="row">
+              <div class="col-sm-12">
+
+                <div class="form-group">
+                  <label for="inputSystemName">Input System Name</label>
+                  <select id="inputSystemName" #inputSystemName name="inputSystemName" class="form-control"
+                          (change)="onChangeInputSystemFirstForm($event.target.value)" #selectedInputSystem ngModel>
+                    <option [hidden]="isSelectedInputSystem" value="">Please choose One</option>
+
+                    <option *ngFor="let inputSystem of inputSystems" #updateSystemName>
+                      {{ inputSystem.inputSystemName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>&lt;!&ndash;/.row&ndash;&gt;
+            -->
+            <div>
+
+            </div>
+            <div [hidden]="!isSelectedInputSystem">
+
+              <!-- <div class="row">
+                 <div class="col-sm-12">
+                   <div class="form-group">
+                     <label for="dropdownEmailTemplateName">Email Templates</label>
+                     <select id="dropdownEmailTemplateName" #dropdownEmailTemplateName name="dropdownEmailTemplateName"
+                             class="form-control"
+                             (change)="onChangeEmailTemplateFirstForm($event.target.value, selectedInputSystem.value)"
+                             #selectedEmailTemplateName ngModel>
+                       <option [hidden]="isSelectedEmailTemplate" value="">Please choose One</option>
+
+                       <option *ngFor="let emailTemplate of emailTemplates" #selectedEmailTemplateOption>
+                         {{emailTemplate.emailTemplateName }}
+
+
+                       </option>
+                     </select>
+                   </div>
+                 </div>
+               </div>/.row-->
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Email Templates</label>
+                    <ng-select  #chosenuser [(items)]="emailTemplates"
+
+                                bindLabel="emailTemplateName"
+                                bindValue="emailTemplateId"
+                                name="inputSystemNameNg"
+                                [(ngModel)]="selectedEmailTemplateId"
+                                (change)="onChangeEmailTemplateFirstForm($event)"
+                                (clear)="onClearEmailTemplate()">
+
+                    </ng-select>
+                    <!--  <select id="dropdownEmailTemplateName" #dropdownEmailTemplateName name="dropdownEmailTemplateName"
+                              class="form-control"
+                              (change)="onChangeEmailTemplateFirstForm($event.target.value, selectedInputSystem.value)"
+                              #selectedEmailTemplateName ngModel>
+                        <option [hidden]="isSelectedEmailTemplate" value="">Please choose One</option>
+
+                        <option *ngFor="let emailTemplate of emailTemplates" #selectedEmailTemplateOption>
+                          {{emailTemplate.emailTemplateName }}
+
+
+                        </option>
+                      </select>-->
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+            <div *ngIf="isSelectedEmailTemplate">
+              <form [formGroup]="mailSender">
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" class="form-control"
+                           formControlName="username">
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control"
+                           formControlName="password">
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group" formArrayName="placeholders">
+
+                    <label>Placeholder</label>
+
+
+                    <div class="row" *ngFor="let place of mailSender.get('placeholders').controls;
+                    let i = index"
+                      [formGroupName]="i"
+                      style="margin-top: 10px;">
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control"
+                               id="placeholderName"
+                                placeholder="name" formControlName="name" >
+                        </div>
+                        <div class="col-sm-6">
+
+                        <input type="text" class="form-control"
+                               id="" name="value"
+                                placeholder="value"  formControlName="value">
+                        </div>
+                      </div>
+                      <hr>
+                    <button type="button" (click)="addPlaceHolder()"
+                            class="btn btn-sm btn-success"
+                    ><i class="fa fa-dot-circle-o"></i>
+                      Add Placeholder
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger"
+                      (click)="onDeleteIngredient()"><i class="fa fa-dot-circle-o"></i>Remove Placeholder</button>
+
+                  </div>
+                </div>
+              </div><!--/.row-->
+              </form>
+            </div>
+            <div [hidden]="!isOperationsSend"
+                 [style.color]="colourOperationsSend">{{operationsSend}}
+            </div>
+
+          </div>
+
+          <div class="card-footer">
+            <button type="submit" [disabled]="!a.valid" [disabled]="!isSelectedEmailTemplate"
+                    class="btn btn-sm btn-success"
+            ><i class="fa fa-dot-circle-o"></i>
+              Send Email
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div><!--/.col-->
+
+
+  </div><!--/.row-->
+
+</div>

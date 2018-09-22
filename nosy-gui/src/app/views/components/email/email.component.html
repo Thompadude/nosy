@@ -1,0 +1,313 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <form (ngSubmit)="updateExistingTemplateFirstForm(a)" #a="ngForm">
+
+          <div class="card-header">
+            <strong>Email Template</strong>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+
+                <div class="form-group">
+                  <label>Input System Name</label>
+
+
+                  <ng-select [(items)]="inputSystems"
+                             bindLabel="inputSystemName"
+                             bindValue="inputSystemId"
+                             name="inputSystemNameNg"
+                             [(ngModel)]="selectedInputSystemId"
+                             (change)="onChangeInputSystemFirstForm($event)"
+                              (clear)="onClearInputSystem()">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <!--<div class="row">
+              <div class="col-sm-12">
+
+                <div class="form-group">
+                  <label for="inputSystemName">Input System Name</label>
+                  <select id="inputSystemName" #inputSystemName name="inputSystemName" class="form-control"
+                          (change)="onChangeInputSystemFirstForm($event.target.value)" #selectedInputSystem ngModel>
+                    <option [hidden]="isSelectedInputSystem" value="">Please choose One</option>
+
+                    <option *ngFor="let inputSystem of inputSystems" #updateSystemName>
+                      {{ inputSystem.inputSystemName }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>&lt;!&ndash;/.row&ndash;&gt;
+            -->
+            <div>
+
+            </div>
+            <div [hidden]="!isSelectedInputSystem">
+
+             <!-- <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="dropdownEmailTemplateName">Email Templates</label>
+                    <select id="dropdownEmailTemplateName" #dropdownEmailTemplateName name="dropdownEmailTemplateName"
+                            class="form-control"
+                            (change)="onChangeEmailTemplateFirstForm($event.target.value, selectedInputSystem.value)"
+                            #selectedEmailTemplateName ngModel>
+                      <option [hidden]="isSelectedEmailTemplate" value="">Please choose One</option>
+
+                      <option *ngFor="let emailTemplate of emailTemplates" #selectedEmailTemplateOption>
+                        {{emailTemplate.emailTemplateName }}
+
+
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>/.row-->
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Email Templates</label>
+                    <ng-select  #chosenuser [(items)]="emailTemplates"
+
+                                bindLabel="emailTemplateName"
+                               bindValue="emailTemplateId"
+                               name="inputSystemNameNg"
+                               [(ngModel)]="selectedEmailTemplateId"
+                               (change)="onChangeEmailTemplateFirstForm($event)"
+                                (clear)="onClearEmailTemplate()">
+
+                    </ng-select>
+                  <!--  <select id="dropdownEmailTemplateName" #dropdownEmailTemplateName name="dropdownEmailTemplateName"
+                            class="form-control"
+                            (change)="onChangeEmailTemplateFirstForm($event.target.value, selectedInputSystem.value)"
+                            #selectedEmailTemplateName ngModel>
+                      <option [hidden]="isSelectedEmailTemplate" value="">Please choose One</option>
+
+                      <option *ngFor="let emailTemplate of emailTemplates" #selectedEmailTemplateOption>
+                        {{emailTemplate.emailTemplateName }}
+
+
+                      </option>
+                    </select>-->
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            <div *ngIf="isSelectedEmailTemplate">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="emailTemplateName">Email Template Name</label>
+                    <input type="text" class="form-control"
+                           id="emailTemplateName" name="emailTemplateName"
+                           ngModel="{{selectedEmailTemplate.emailTemplateName}}">
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="fromAddress">Email From Address</label>
+                    <input type="text" class="form-control"
+                           id="fromAddress" name="fromAddress"
+                           ngModel="{{selectedEmailTemplate.fromAddress}}">
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="emailFromProvider">From Provider</label>
+                    <select id="emailFromProvider" name="emailFromProvider"
+                            class="form-control" [(ngModel)]="selectedEmailTemplate.emailFromProvider" required>
+                      <option *ngFor="let provider of availableProviders"
+                              [ngValue]="provider" #updateSystemName
+                      >
+                        {{provider }}
+                      </option>
+                    </select>
+
+                  </div>
+                </div>
+              </div><!--/.row-->
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="emailTemplateTo1">Email To</label>
+                    <textarea type="text" class="form-control" #emailTemplateTo1
+                              id="emailTemplateTo1" name="emailTemplateTo1"
+                              ngModel="{{selectedEmailTemplate.emailTemplateTo}}" required>
+                  </textarea>
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="emailTemplateCc1">Email CC</label>
+                    <textarea type="text" class="form-control" #emailTemplateCc1
+                              id="emailTemplateCc1" name="emailTemplateCc1"
+                              ngModel="{{selectedEmailTemplate.emailTemplateCc}}">
+                  </textarea>
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control"
+                           id="subject" name="subject"
+                           ngModel="{{selectedEmailTemplate.subject}}" required>
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="text">Email Text</label>
+                    <textarea type="text" class="form-control"
+                              id="text" name="text"
+                              ngModel="{{selectedEmailTemplate.text}}" required>
+                    </textarea>
+                  </div>
+
+                </div>
+              </div><!--/.row-->
+
+            </div>
+            <div [hidden]="!isOperationsUpdateAndDelete"
+                 [style.color]="colourOperationsUpdateAndDelete">{{operationsUpdateAndDelete}}
+            </div>
+
+          </div>
+
+          <div class="card-footer">
+            <button type="submit" [disabled]="!a.valid" [disabled]="!isSelectedEmailTemplate"
+                    class="btn btn-sm btn-success"
+            ><i class="fa fa-dot-circle-o"></i>
+              Update
+            </button>
+            <button type="button" [disabled]="!isSelectedEmailTemplate" class="btn btn-sm btn-danger"
+                    (click)="deleteExistingTemplate()"><i
+              class="fa fa-dot-circle-o"></i>
+              Delete
+            </button>
+          </div>
+        </form>
+      </div>
+    </div><!--/.col-->
+
+
+    <div class="col-sm-6">
+      <div class="card">
+        <form (ngSubmit)="onAddNewEmailTemplate(f)" #f="ngForm">
+          <div class="card-header">
+            <strong>New Email Template</strong>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Input System Name*</label>
+              <ng-select [(items)]="inputSystems"
+                         bindLabel="inputSystemName"
+                         bindValue="inputSystemId"
+                         name="inputSystemNameNg"
+                         [(ngModel)]="inputSystemIdFotTemplateCreationId"
+                         (change)="newTemplateInputSystemOnChange($event)"
+                         (clear)="onClearInputSystem()"
+                >
+              </ng-select>
+              <!--<select id="inputSystemIdFotTemplateCreation" name="inputSystemIdFotTemplateCreation" class="form-control"
+                      (change)="newTemplateInputSystemOnChange($event.target.value)" ngModel>
+                <option [hidden]="isSelectedInputSystemForPost" value="">Please choose One</option>
+                <option *ngFor="let inputSystem of inputSystems; let i = index" #updateSystemName
+                >
+                  {{ inputSystem.inputSystemName }}
+                </option>
+              </select>
+           --> </div>
+            <div class="form-group">
+              <label for="newEmailTemplateName">Email Template Name*</label>
+              <input type="text" class="form-control" id="newEmailTemplateName" name="newEmailTemplateName" required
+                     ngModel>
+              <span class="help-block"><i>Should be unique for Input System</i></span>
+            </div>
+            <div class="form-group">
+              <label for="newFromAddress">Email Provider*</label>
+              <select id="newFromProviderId" name="newFromProvider"
+                      class="form-control"
+
+
+                      ngModel>
+
+                <option *ngFor="let provider of availableProviders"
+                        #newFromProviderOption
+                >
+                  {{provider }}
+                </option>
+              </select> <span class="help-block"><i>Select your email provider</i></span>
+            </div>
+            <div class="form-group">
+              <label for="newFromAddress">From Email*</label>
+              <input type="email" class="form-control" id="newFromAddress" name="newFromAddress" ngModel required>
+              <span
+                class="help-block"><i>Domain Should match Provider, if you cannot find your provider select Default</i></span>
+
+            </div>
+            <div class="form-group">
+              <label for="newSubject">Subject*</label>
+              <input type="text" class="form-control" id="newSubject" name="newSubject" required ngModel>
+              <span class="help-block"><i>Email Subject</i></span>
+            </div>
+            <div class="form-group">
+              <label for="newEmailTo">Email To*</label>
+              <textarea type="text" class="form-control" id="newEmailTo" name="newEmailTo" required ngModel></textarea>
+              <span class="help-block"><i>List of emails divided by comma</i></span>
+            </div>
+            <div class="form-group">
+              <label for="newEmailCc">Email CC</label>
+              <textarea type="text" class="form-control" id="newEmailCc" name="newEmailCc" ngModel></textarea>
+              <span class="help-block"><i>List of emails divided by comma</i></span>
+            </div>
+            <div class="form-group">
+              <label for="newEmailText">Email Text*</label>
+              <textarea class="form-control" id="newEmailText" name="newEmailText" required
+                        ngModel></textarea>
+              <span class="help-block"><i>Text for the Email you can use as a #{{'{'}}your_code{{'}'}}# placeholder</i></span>
+
+
+            </div>
+            <div [hidden]="!isPostSuccess" [style.color]="colourPostSuccessMessage">
+              {{postSuccessMessage}}
+            </div>
+
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary" [disabled]="!f.valid"><i
+              class="fa fa-dot-circle-o"></i> Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+
+</div>

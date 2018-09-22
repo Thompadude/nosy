@@ -1,0 +1,62 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <div class="card-body p-4">
+            <form (ngSubmit)="register(a)" #a="ngForm">
+              <h1>Register</h1>
+              <p class="text-muted">Create your account</p>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Email" name="email" ngModel required email>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-user"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="First Name" name="firstName" ngModel required>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-user"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Last Name" name="lastName" ngModel required>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="password" name="password" required
+                       [(ngModel)]="password">
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="icon-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" placeholder="Repeat password" name="repeatPassword" required [(ngModel)]="repeatPassword">
+              </div>
+              <div *ngIf="password!=repeatPassword">
+                <p style="color: red; ">Passwords don't match</p>
+              </div>
+              <div *ngIf="password!=null && password.length<6">
+                <p style="color: red; ">Password should be more than 6 symbols</p>
+              </div>
+              <div *ngIf="error">
+                <p style="color: red; ">{{error}}</p>
+              </div>
+
+              <button type="submit" [disabled]="!a.valid || password != repeatPassword || (password!=null && password.length<6)"
+                      class="btn btn-primary">Register
+              </button>
+              <button type="button" routerLink="/login" class="btn btn-primary">Back to Login</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
